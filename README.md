@@ -1,126 +1,177 @@
-# CureWise-AI: AI-Powered Healthcare Platform
+# CureWise AI Medical Healthcare
 
-**CureWise-AI** is a modern, production-grade healthcare data platform that leverages Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), and advanced AI/ML techniques to deliver intelligent analytics, medical report parsing, and conversational AI for hospitals, doctors, and patients.
-
----
+CureWise AI Medical Healthcare is a full-stack healthcare platform that combines hospital management workflows with AI-assisted medical features. The project includes a React frontend, a FastAPI backend, PostgreSQL for application data, and multiple AI integrations for medical Q&A, report parsing, and image-based disease analysis.
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
-- [Key Features](#key-features)
-- [Architecture](#architecture)
+- [Overview](#overview)
+- [Core Features](#core-features)
 - [Tech Stack](#tech-stack)
-- [Directory Structure](#directory-structure)
-- [Setup & Installation](#setup--installation)
-- [Development & Contribution](#development--contribution)
+- [Project Structure](#project-structure)
+- [Environment Variables](#environment-variables)
+- [Getting Started](#getting-started)
+- [Running with Docker](#running-with-docker)
+- [Available Scripts](#available-scripts)
+- [Backend API Areas](#backend-api-areas)
+- [Current Notes](#current-notes)
 - [License](#license)
 
----
+## Overview
 
-## Project Overview
+This repository contains a healthcare application focused on:
 
-CureWise-AI brings together LLMs, RAG, and healthcare data engineering to provide:
+- patient and provider authentication
+- hospital, admin, doctor, and department management
+- appointment booking and scheduling flows
+- medical history and profile management
+- AI-powered medical query handling
+- disease detection from medical images
+- emergency hospital lookup and healthcare analytics
 
-- **Conversational AI** for medical queries, appointment booking, and patient support.
-- **Automated parsing and structuring** of medical documents (e.g., blood reports) using LLMs.
-- **Retrieval-Augmented Generation (RAG)** for context-aware, accurate responses using a vector database (Pinecone).
-- **AI-powered analytics** and disease detection. Analyze patient images and provide a diagnosis.
-- **Realtime Agents** connected with database to provide realtime analytics and insights.
-- **Seamless integration** with hospital operations, doctor scheduling, and patient management.
+The frontend lives in `frontend/` and the backend lives in `backend/`.
 
----
+## Core Features
 
-## Key Features
-
-- **LLM-Powered Chatbot:** Natural language interface for patients and doctors, powered by Gemini and Llama models.
-- **RAG System:** Combines LLMs with Pinecone vector search for context-rich, accurate answers.
-- **Medical Report Parsing:** Extracts and structures data from blood reports using LlamaParse and Groq.
-- **Appointment Booking Agent:** Intelligent agent for scheduling, rescheduling, and querying appointments.
-- **Acne & Disease Detection:** Image-based analysis using AI models (extendable for other conditions).
-- **Memory & Context:** Maintains chat and report history for personalized, context-aware responses.
-- **Extensible Tools:** Modular agent design for adding new tools and workflows.
-
----
-
-## Architecture
-
-```
-[React Frontend] <---> [FastAPI Backend: LLM, RAG, AI] <---> [PostgreSQL, Pinecone]
-                                              |
-                                [LangChain, Llama, Groq, Gemini]
-```
-
-- **LLM Agents**: Orchestrate workflows, parse documents, and answer queries.
-- **RAG**: Uses Pinecone for vector search over medical conversations and documents.
-- **FastAPI**: Exposes REST APIs for all LLM and AI features.
-- **PostgreSQL**: Stores chat, report, and appointment history.
-
----
+- Authentication for users and healthcare roles
+- Hospital and department management for admins
+- Doctor management, time slots, and appointment views
+- Appointment booking for patients
+- Medical history and user profile APIs
+- AI medical query endpoints
+- General-purpose chatbot support
+- Emergency hospital lookup endpoint
+- Image classification flows for:
+  - kidney disease
+  - breast cancer
+  - lymphoma
+  - pneumonia
+  - eye disease
+- Follow-up chat endpoints for disease-specific guidance
+- Docker-based local development setup
 
 ## Tech Stack
 
-- **LLMs**: Gemini (Google), Llama (Meta), Groq
-- **RAG**: Pinecone, LangChain, Google Generative AI Embeddings
-- **Backend**: FastAPI, Python, psycopg2
-- **Frontend**: React
-- **Database**: PostgreSQL
-- **AI/ML**: LlamaParse, custom disease detection models
-- **Containerization**: Docker
+### Frontend
 
----
+Frontend dependencies are declared in [frontend/package.json](frontend/package.json).
 
-## Directory Structure
+- React 19
+- React Router DOM 7
+- Tailwind CSS
+- Framer Motion
+- Axios
+- Recharts
+- React Icons
 
+### Backend
+
+Backend dependencies are declared in [backend/requirements.txt](backend/requirements.txt).
+
+- FastAPI
+- Python 3.9+
+- Pydantic
+- psycopg2
+- python-jose
+- passlib
+
+### AI and Data
+
+- LangChain
+- Google Generative AI
+- Groq
+- OpenAI SDK
+- Pinecone
+- Llama Cloud / LlamaParse
+- TensorFlow
+
+### Infrastructure
+
+- PostgreSQL 16
+- Docker
+- Docker Compose
+
+## Project Structure
+
+```text
+CureWise-AI-Medical-Healthcare/
+├── backend/
+│   ├── config/              # Environment-backed settings
+│   ├── models/              # Pydantic schemas
+│   ├── notebooks/           # Research and experimentation notebooks
+│   ├── routes/              # FastAPI route modules
+│   ├── utils/               # Database, AI, parser, email, and helper logic
+│   ├── main.py              # FastAPI application entry point
+│   ├── requirements.txt     # Backend dependencies
+│   └── Dockerfile           # Backend container config
+├── frontend/
+│   ├── public/              # Static assets
+│   ├── src/
+│   │   ├── components/      # Shared UI and layout components
+│   │   ├── context/         # React context providers
+│   │   ├── data/            # Static UI data
+│   │   ├── pages/           # Route-level screens
+│   │   └── utils/           # API and auth helpers
+│   ├── package.json         # Frontend dependencies and scripts
+│   ├── tailwind.config.js   # Tailwind configuration
+│   └── Dockerfile           # Frontend container config
+├── docker-compose.yml       # Multi-service local environment
+├── AGENTS.md                # Project guidance for coding agents
+└── README.md                # Project documentation
 ```
-backend/
-│
-├── main.py                 # FastAPI app, API endpoints
-├── utils/
-│   ├── agents.py           # LLM agent orchestration, tools, booking agent
-│   ├── pineconeutils.py    # RAG, Pinecone vector DB, retrieval chains
-│   ├── parser.py           # LlamaParse, Groq, report parsing/structuring
-│   ├── email.py            # Email utilities
-│   └── ...                 # Other utilities
-├── models/
-│   └── schemas.py          # Pydantic schemas
-├── config/
-│   └── settings.py         # API keys, DB config
-├── notebooks/
-│   ├── RAG_Chatbot_Pinecone.ipynb
-│   ├── LlamaParser.ipynb
-│   └── ...                 # Demos and experiments
-└── requirements.txt        # Python dependencies
+
+## Environment Variables
+
+The backend reads configuration from `backend/.env` through `python-dotenv`, and the application settings are loaded in [backend/config/settings.py](backend/config/settings.py).
+
+```env
+JWT_SECRET=
+JWT_ALGORITHM=
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+
+GOOGLE_API_KEY=
+GROQ_API_KEY=
+OPENAI_API_KEY=
+PINECONE_API_KEY=
+
+EMAIL_SENDER=
+EMAIL_PASSWORD=
+SMTP_SERVER=
+SMTP_PORT=
+
+LOCAL_LLM=false
+
+KIDNEY_MODEL_PATH=
+BREAST_CANCER_MODEL_PATH=
+LYMPHOMA_MODEL_PATH=
+PNEUMONIA_MODEL_PATH=
+EYE_DISEASE_MODEL_PATH=
 ```
 
----
+The frontend currently uses `http://localhost:8000` as the API base URL in [frontend/src/utils/api.js](frontend/src/utils/api.js).
 
-## Setup & Installation
+## Getting Started
 
 ### Prerequisites
 
-- Python 3.9+
+- Python 3.9 or newer
+- Node.js and npm
 - PostgreSQL
-- Pinecone account (API key)
-- Google Generative AI API key
-- Groq API key
-- LlamaParse API key
+- API keys for the AI services you plan to use
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/tkarim45/CureWise-AI-Medical-Healthcare.git
+git clone <your-repository-url>
 cd CureWise-AI-Medical-Healthcare
 ```
 
-### 2. Docker Setup
-
-```bash
-docker compose up --build
-```
-
-### 3. Local Setup
-
-#### 1. Create a virtual environment
+### 2. Set up the backend
 
 ```bash
 cd backend
@@ -129,22 +180,19 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-#### 2. Configure Environment
+Create or update `backend/.env` with your database credentials, JWT settings, model paths, and AI API keys.
 
-- Set API keys and DB credentials in `config/settings.py` or as environment variables:
-  - `GOOGLE_API_KEY`
-  - `PINECONE_API_KEY`
-  - `GROQ_API_KEY`
-  - `LLAMA_PARSER_API_KEY`
-  - `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`
-
-#### 3. Run the Backend
+Start the backend server:
 
 ```bash
-uvicorn main:app --reload
+python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-#### 4. Run the Frontend
+The backend entry point is [backend/main.py](backend/main.py).
+
+### 3. Set up the frontend
+
+Open a new terminal:
 
 ```bash
 cd frontend
@@ -152,69 +200,64 @@ npm install
 npm start
 ```
 
----
+The frontend scripts are defined in [frontend/package.json](frontend/package.json). The frontend runs on `http://localhost:3000` and the backend runs on `http://localhost:8000`.
 
-## PostgreSQL Setup (macOS)
+## Running with Docker
 
-To set up PostgreSQL for local development, run the following commands:
+You can run the full stack with Docker Compose:
 
-```sh
-brew install postgresql
-brew services start postgresql
-psql -l
-createdb curewise
-psql -U tkarim45 -d curewise -h localhost
+```bash
+docker-compose up --build
 ```
 
-## PostgreSQL Setup (Windows)
+Container services are defined in [docker-compose.yml](docker-compose.yml):
 
-To set up PostgreSQL for local development on **Windows**, follow these steps:
+- `frontend` on port `3000`
+- `backend` on port `8000`
+- `postgres` on port `5432`
 
----
+To stop the containers:
 
-## 1. Install PostgreSQL
+```bash
+docker-compose down
+```
 
-Download and install PostgreSQL from the official site:  
-👉 [https://www.postgresql.org/download/windows/](https://www.postgresql.org/download/windows/)
+## Available Scripts
 
-During installation:
+### Frontend
 
-- Choose a version (e.g., **16** or **17**)
-- Set a password for the default PostgreSQL user (`postgres`)
-- Leave the port as **5432** (default)
+Run these from `frontend/` using the scripts in [frontend/package.json](frontend/package.json):
 
-> ✅ After installation, PostgreSQL runs automatically as a Windows service.
+```bash
+npm start
+npm run build
+npm test
+```
 
----
+### Backend
 
-## Development & Contribution
+Run these from `backend/` based on the app entry point in [backend/main.py](backend/main.py):
 
-- Fork and clone the repo.
-- Use feature branches and submit PRs.
-- Follow best practices for Python, LLM prompt engineering, and API design.
-- Add tests and update documentation for new features.
+```bash
+python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
+python -m pytest
+```
 
----
+## Backend API Areas
+
+The FastAPI app is assembled from [backend/main.py](backend/main.py) and route modules under [backend/routes](backend/routes).
+
+- `/api/auth/*` for signup and login
+- hospital and admin management endpoints
+- doctor management and scheduling endpoints
+- appointment booking and appointment history
+- user profile and medical history endpoints
+- `/api/medical-query` and `/api/general-query`
+- disease image classification endpoints
+- disease-specific chat endpoints
+- emergency hospital lookup
+- health analytics endpoints
 
 ## License
 
-This project is licensed under the MIT License.
-
----
-
-## Acknowledgements
-
-- [LangChain](https://python.langchain.com/)
-- [Pinecone](https://www.pinecone.io/)
-- [Google Generative AI](https://ai.google.dev/)
-- [Groq](https://groq.com/)
-- [LlamaParse](https://llamaindex.ai/)
-- [FastAPI](https://fastapi.tiangolo.com/)
-
----
-
-**For questions or support, open an issue or contact the maintainer.**
-
-```
-
-```
+This repository includes an MIT [LICENSE](LICENSE).
