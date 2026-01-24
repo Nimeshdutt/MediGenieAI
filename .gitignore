@@ -1,27 +1,61 @@
-backend/venv
-frontend/node_modules
-venv/
-backend/venv/
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
 backend/.env
 backend/notebooks/.env
-backend/__pycache__
-backend/models/__pycache__
-backend/routes/__pycache__
-Screenshot 2025-05-15 at 4.25.44 PM.png
-
 backend/utils/.env
 
-backend/models/.DS_Store
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+backend/venv/
 
-.DS_Store
-frontend/.DS_Store
+# Node / React
+node_modules/
+frontend/node_modules/
+frontend/build/
+frontend/coverage/
 
+# Build / cache
+dist/
+build/
 
-backend/data/Breast Cancer/Model
-backend/data/kidney_disease/Model
-backend/utils/__pycache__/ai_utils.cpython-39.pyc
+# Local uploads / generated files
+*.sqlite3
+*.db
+
+# Project-specific local model artifacts
+backend/data/Breast Cancer/Model/
+backend/data/kidney_disease/Model/
 backend/data/eyedisease/eyedisease.h5
 backend/data/Lymphoma/Lymphoma classification1.h5
 backend/data/pneumonia/model-Pneumonia Detection-88.04.h5
-
 
