@@ -1,4 +1,4 @@
-# CureWise AI Medical Healthcare
+# MediGenie AI Medical Healthcare
 
 CureWise AI Medical Healthcare is a full-stack healthcare platform that combines hospital management workflows with AI-assisted medical features. The project includes a React frontend, a FastAPI backend, PostgreSQL for application data, and multiple AI integrations for medical Q&A, report parsing, and image-based disease analysis.
 
