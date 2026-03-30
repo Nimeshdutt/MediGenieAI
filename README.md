@@ -1,6 +1,6 @@
 # MediGenie AI Medical Healthcare
 
-CureWise AI Medical Healthcare is a full-stack healthcare platform that combines hospital management workflows with AI-assisted medical features. The project includes a React frontend, a FastAPI backend, PostgreSQL for application data, and multiple AI integrations for medical Q&A, report parsing, and image-based disease analysis.
+MediGenie AI Medical Healthcare is a full-stack healthcare platform that combines hospital management workflows with AI-assisted medical features. The project includes a React frontend, a FastAPI backend, PostgreSQL for application data, and multiple AI integrations for medical Q&A, report parsing, and image-based disease analysis.
 
 ## Table of Contents
 
@@ -93,7 +93,7 @@ Backend dependencies are declared in [backend/requirements.txt](backend/requirem
 ## Project Structure
 
 ```text
-CureWise-AI-Medical-Healthcare/
+MediGenie-AI-Medical-Healthcare/
 ├── backend/
 │   ├── config/              # Environment-backed settings
 │   ├── models/              # Pydantic schemas
@@ -168,7 +168,7 @@ The frontend currently uses `http://localhost:8000` as the API base URL in [fron
 
 ```bash
 git clone <your-repository-url>
-cd CureWise-AI-Medical-Healthcare
+cd MediGenie-AI-Medical-Healthcare
 ```
 
 ### 2. Set up the backend
