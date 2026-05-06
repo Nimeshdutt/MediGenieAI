@@ -7,7 +7,7 @@ load_dotenv()
 class Settings:
     DB_PATH = os.getenv(
         "DB_PATH",
-        "/Users/taimourabdulkarim/Documents/Personal Github Repositories/HealthSync-AI/backend/healthsync.db",
+        "/Users/Nimesh-Dutt/Documents/Personal Github Repositories/MediGenie-AI/backend/MediGenie.db",
     )
     JWT_SECRET = os.getenv("JWT_SECRET")
     JWT_ALGORITHM = os.getenv("JWT_ALGORITHM")
